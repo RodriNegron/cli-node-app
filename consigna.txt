@@ -1,0 +1,30 @@
+Desarrolla una consola simple para manejar archivos y carpetas ingresando comandos por teclado, similar aBash, por ejemplo.
+Todos los recursos deben ser mantenidos en memoria y no persistidos a disco. Los archivos no necesita tener
+extensión pero deben tener metadata (la información de la metadata queda a tu criterio).
+La forma recomendada para entrar a la consola desde el SO es:
+ruby consola.rb
+
+Comandos que soporta la consola
+Archivos y carpetas
+
+Crear un archivo con un contenido
+create_file file_1 "Contenido"
+
+Ver el contenido de un archivo
+show file_1
+
+Ver la metadata de un archivo
+metadata file_1
+
+Crear una carpeta
+create_folder folder_1
+
+Entrar a una carpeta
+cd folder_1
+
+Volver una carpeta para atrás:
+cd ..
+
+Eliminar archivo o carpeta
+destroy file_1
+destroy folder_1
