@@ -1,10 +1,8 @@
-
 class File {
-    constructor (name, content) {
-        this.name = name;
-        this.content = content;
-    }
-    
+  constructor(name, content) {
+    this.name = name;
+    this.content = content;
+  }
 }
 
-module.exports= File
+module.exports = File;
