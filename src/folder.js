@@ -7,7 +7,7 @@ class Folder {
   }
 
   createDirectory(name) {
-    let newDirectory = new Folder(name);
+    let newDirectory = new Folder(name);  //agregar restriccion si no ponenombre
     this.files.push(newDirectory); //crea una nueva carpeta desde la carpeta donde se llama
   }
 
@@ -30,11 +30,11 @@ class Folder {
   }
 
   showFile(fileName) {
-    return this.files.find((file) => file.name === fileName)
+    return this.files.find((file) => file.name === fileName);
   }
 
   showMeta(fileName) {
-    return this.files.find((file) => file.name === fileName)
+    return this.files.find((file) => file.name === fileName);
   }
 
   listDirectory() {
@@ -43,13 +43,17 @@ class Folder {
     });
   }
 
-  delete(fileName){
-    return this.files.filter((file)=> file.name != fileName)
+  delete(fileName) {
+    return this.files.filter((file) => file.name != fileName);
   }
 
-  moveBack(){
-    console.log(this.super);
-
+  moveBack(path) {
+    if(path.length > 1){
+      path.pop();
+      return path;
+    } else {
+      return console.log("you can not go backwards")
+    }
   }
 }
 
