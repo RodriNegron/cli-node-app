@@ -30,21 +30,26 @@ class Folder {
   }
 
   showFile(fileName) {
-    this.files.forEach((file) => {
-      if (file.name == fileName) return file.name;
-    });
+    return this.files.find((file) => file.name === fileName)
   }
 
   showMeta(fileName) {
-    this.files.forEach((file) => {
-      if (file.name == fileName) return file;
-    });
+    return this.files.find((file) => file.name === fileName)
   }
 
-  showFolder() {
+  listDirectory() {
     this.files.forEach((file) => {
       console.log(file.name);
     });
+  }
+
+  delete(fileName){
+    return this.files.filter((file)=> file.name != fileName)
+  }
+
+  moveBack(){
+    console.log(this.super);
+
   }
 }
 
