@@ -48,6 +48,18 @@ class UserList {
       }
     });
   }
+
+  logOut() {
+    this.loggedUser = null;
+  }
+
+  updatePassword(newPassword, userName) {
+    let pos;
+    this.userList.forEach((user, i) => {
+      if (user.userName === userName) pos = i;
+    });
+    this.userList[pos].password = newPassword;
+  }
 }
 
 module.exports = UserList;
