@@ -7,7 +7,7 @@ class Folder {
   }
 
   createDirectory(name) {
-    let newDirectory = new Folder(name);  //agregar restriccion si no ponenombre
+    let newDirectory = new Folder(name);
     this.files.push(newDirectory); //crea una nueva carpeta desde la carpeta donde se llama
   }
 

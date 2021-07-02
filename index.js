@@ -26,18 +26,20 @@ const main = async () => {
         process.exit(0);
 
       } else if (command.toLowerCase() === "create_folder") {
-        currentDirectory.createDirectory(argument1);
+        argument1 ? currentDirectory.createDirectory(argument1) :
+        console.log(`Error: folder name can not be empty`);
 
       } else if (command.toLowerCase() === "cd") {
-        if (currentDirectory.changeDirectory(argument1)) {
+        if (currentDirectory.changeDirectory(argument1) && (currentDirectory.showFile(argument1) instanceof Folder)) {
           currentDirectory = currentDirectory.changeDirectory(argument1);
           path.push(currentDirectory);
         } else {
-          console.log(`Error: ${argument1} does not exist in this directory`);
+          console.log(`Error: ${argument1} not a valid directory`);
         }
 
       } else if (command.toLowerCase() === "create_file") {
-        currentDirectory.createFile(argument1, argument2);
+        argument1 ? currentDirectory.createFile(argument1, argument2):
+        console.log(`Error: file name can not be empty`);
 
       } else if (command.toLowerCase() === "ls") {
         currentDirectory.files.length != 0
