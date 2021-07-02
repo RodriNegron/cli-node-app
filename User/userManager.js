@@ -7,8 +7,6 @@ function userManager(userList, command, argument1, argument2, argument3) {
     process.exit(0);
 
   } else if (command.toLowerCase() === "create_user") {
-    console.log("todo el obj", userList);
-
     userList.loggedUser && userList.loggedUser instanceof Super
       ? userList.createUser(argument1, argument2, argument3)
       : console.log(`you don't have permission to access this method`);
@@ -29,7 +27,7 @@ function userManager(userList, command, argument1, argument2, argument3) {
     userList.loggedUser instanceof Super
       ? userList.deleteUser(argument1)
       : console.log(`you don't have permission to access this method`);
-      
+
   } else if (command.toLowerCase() === "whoami") {
     if (userList.loggedUser) {
       console.log("Logged user: ", userList.loggedUser.userName);

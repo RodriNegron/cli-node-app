@@ -1,6 +1,9 @@
 # cli-node-app
 NodeJs Command line app for users and files management
 
+# Running
++ node .
+
 ## User commands (roles = super, regular, read_only)
 
 + create_user username password -role=ready_only
