@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 const main = async () => {
   try {
     let root = new Folder("root");
-    let currentDirectory = root; //directorio donde se encuentra el usuario en el momento
+    let currentDirectory = root;
     let path = [root];
 
     rl.prompt();

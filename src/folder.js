@@ -8,7 +8,7 @@ class Folder {
 
   createDirectory(name) {
     let newDirectory = new Folder(name);
-    this.files.push(newDirectory); //crea una nueva carpeta desde la carpeta donde se llama
+    this.files.push(newDirectory); 
   }
 
   findIndex(targetDirectory) {
@@ -47,6 +47,7 @@ class Folder {
     return this.files.filter((file) => file.name != fileName);
   }
 
+  //TODO
   moveBack(path) {
     if(path.length > 1){
       path.pop();
