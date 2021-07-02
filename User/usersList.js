@@ -60,6 +60,10 @@ class UserList {
     });
     this.userList[pos].password = newPassword;
   }
+
+  deleteUser(userName) {
+    this.userList = this.userList.filter((user) => user.userName != userName);
+  }
 }
 
 module.exports = UserList;
