@@ -3,7 +3,7 @@ class File {
     this.name = name;
     this.content = content;
     this.meta = {
-      createdAt: Date.now()
+      createdAt: Date.now(),
     };
   }
 }

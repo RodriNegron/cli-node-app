@@ -8,7 +8,41 @@ class Folder {
 
   createDirectory(name) {
     let newDirectory = new Folder(name);
-    this.files.push(newDirectory); 
+    this.files.push(newDirectory);
+  }
+
+  createFile(name, content) {
+    let newFile = new File(name, content);
+    this.files.push(newFile);
+  }
+
+  showFile(fileName) {
+    let fileToShow;
+    this.files.find((file) => {
+      if (file.name === fileName && file instanceof File) fileToShow = file;
+    });
+    fileToShow ? console.log(fileToShow.name) : console.log("Not a file");
+  }
+
+  showMeta(fileName) {
+    let fileToShow;
+    this.files.find((file) => {
+      if (file.name === fileName && file instanceof File) fileToShow = file;
+    });
+    fileToShow ? console.log(fileToShow.meta) : console.log("Not a file");
+  }
+
+  listDirectory() {
+    this.files.forEach((file) => {
+      console.log(file.name);
+    });
+  }
+
+  delete(fileName) {
+    this.files.forEach((file) => {
+      file.name === fileName;
+      this.files = this.files.filter((file) => file.name != fileName);
+    });
   }
 
   findIndex(targetDirectory) {
@@ -24,36 +58,13 @@ class Folder {
     return targetDirectory;
   }
 
-  createFile(name, content) {
-    let newFile = new File(name, content);
-    this.files.push(newFile);
-  }
-
-  showFile(fileName) {
-    return this.files.find((file) => file.name === fileName);
-  }
-
-  showMeta(fileName) {
-    return this.files.find((file) => file.name === fileName);
-  }
-
-  listDirectory() {
-    this.files.forEach((file) => {
-      console.log(file.name);
-    });
-  }
-
-  delete(fileName) {
-    return this.files.filter((file) => file.name != fileName);
-  }
-
   //TODO
   moveBack(path) {
-    if(path.length > 1){
+    if (path.length > 1) {
       path.pop();
       return path;
     } else {
-      return console.log("you can not go backwards")
+      return console.log("you can not go backwards");
     }
   }
 }

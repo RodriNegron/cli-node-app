@@ -2,7 +2,12 @@
 NodeJs Command line app for users and files management
 
 # Running
+
++ npm install
+
 + node .
+
++ default admin user: username = admin, password = admin
 
 ## User commands (roles = super, regular, read_only)
 
@@ -13,6 +18,8 @@ NodeJs Command line app for users and files management
 + destroy_user username
 
 + login username password
+
++ logout
 
 + whoami
 

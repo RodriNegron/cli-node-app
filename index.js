@@ -16,13 +16,11 @@ const main = async () => {
     let users = new UserList();
     let root = new Folder("root");
     let path = [root];
-    
-    users.createUser("admin","admin", "super");
-    
+
+    users.createUser("admin", "admin", "super");
 
     rl.prompt();
     rl.on("line", (cliComand) => {
-
       let inputs = cliComand.split(" ");
       let command = inputs[0];
       let argument1 = inputs[1];
@@ -30,11 +28,11 @@ const main = async () => {
       let argument3 = inputs[3];
 
       userManager(users, command, argument1, argument2, argument3);
-
-      //fileManager(root, command, argument1, argument2, path);
+      users.loggedUser
+        ? fileManager(root, command, argument1, argument2, path) //enviar el userLoged para verificar si puede crear o solo leer
+        : console.log("You need to log before use commands");
 
       rl.prompt();
-
     }).on("close", () => {
       console.log("Exiting");
       process.exit(0);

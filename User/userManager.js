@@ -2,6 +2,7 @@ const Super = require("./super");
 const Regular = require("./regular");
 
 function userManager(userList, command, argument1, argument2, argument3) {
+  
   if (command.toLowerCase() === "exit") {
     console.log("\nExiting!\n");
     process.exit(0);
@@ -23,7 +24,7 @@ function userManager(userList, command, argument1, argument2, argument3) {
       ? userList.updatePassword(argument1, userList.loggedUser.userName)
       : console.log(`you don't have permission to access this method`);
 
-  } else if (command.toLowerCase() === "destroy_user") {
+  } else if (command.toLowerCase() === "destroy_user") { //buscar primero se lo encuentra
     userList.loggedUser instanceof Super
       ? userList.deleteUser(argument1)
       : console.log(`you don't have permission to access this method`);

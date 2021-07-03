@@ -17,7 +17,9 @@ function fileManager(currentDirectory, command, argument1, argument2, path) {
       currentDirectory.changeDirectory(argument1) &&
       currentDirectory.showFile(argument1) instanceof Folder
     ) {
-      currentDirectory = currentDirectory.changeDirectory(argument1);
+
+      currentDirectory.changeDirectory(argument1);
+
       path.push(currentDirectory);
       console.log("current dirrr", currentDirectory)
 
@@ -38,21 +40,13 @@ function fileManager(currentDirectory, command, argument1, argument2, path) {
       : console.log(`${currentDirectory.name.toUpperCase()} folder is empty`);
 
   } else if (command.toLowerCase() === "show") {
-    let fileToShow = currentDirectory.showFile(argument1);
-    fileToShow
-      ? console.log(currentDirectory.showFile(argument1).content)
-      : console.log(`Error: ${argument1} does not exist in this directory`);
-
+   currentDirectory.showFile(argument1);
+  
   } else if (command.toLowerCase() === "metadata") {
-    let fileToShow = currentDirectory.showMeta(argument1);
-    fileToShow
-      ? console.log(currentDirectory.showFile(argument1).meta)
-      : console.log(`Error: ${argument1} does not exist in this directory`);
-
+    currentDirectory.showMeta(argument1);
+   
   } else if (command.toLowerCase() === "destroy") {
-    currentDirectory.showFile(argument1)
-      ? (currentDirectory.files = currentDirectory.delete(argument1))
-      : console.log(`${argument1} does not exist in this directory`);
+    currentDirectory.delete(argument1)
 
   } else if (command.toLowerCase() === "whereami") {
     let builder = "~";
