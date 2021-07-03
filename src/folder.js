@@ -54,8 +54,11 @@ class Folder {
   }
 
   changeDirectory(targetDirectory) {
-    targetDirectory = this.files[this.findIndex(targetDirectory)];
-    return targetDirectory;
+    if (this.files[this.findIndex(targetDirectory)] instanceof Folder) {
+      return (targetDirectory = this.files[this.findIndex(targetDirectory)]);
+    } else {
+      console.log(`${targetDirectory} not a valid directory`);
+    }
   }
 
   //TODO
