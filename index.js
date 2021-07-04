@@ -4,6 +4,9 @@ const readline = require("readline");
 const Folder = require("./src/folder");
 const Super = require("./user/super");
 const UserList = require("./user/usersList");
+const ReadOnly = require("./user/read_only");
+const Regular = require("./user/regular");
+const fs = require("fs");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -21,6 +24,7 @@ const main = async () => {
 
     rl.prompt();
     rl.on("line", (cliComand) => {
+
       let inputs = cliComand.split(" ");
       let command = inputs[0];
       let argument1 = inputs[1];
@@ -30,39 +34,45 @@ const main = async () => {
       userManager(users, command, argument1, argument2, argument3); //enviar el userLoged para verificar si puede crear o solo leer
       if (users.loggedUser) {
 
+        if (
+          users.loggedUser instanceof Super ||
+          users.loggedUser instanceof Regular
+        ) {
+          if (command.toLowerCase() === "exit") {
+            console.log("\nExiting!\n");
+            process.exit(0);
+
+          } else if (command.toLowerCase() === "create_folder") {
+            currentDirectory.createDirectory(argument1);
+
+          } else if (command.toLowerCase() === "create_file") {
+            currentDirectory.createFile(argument1, argument2);
+
+          } else if (command.toLowerCase() === "destroy") {
+            currentDirectory.delete(argument1);
+          }
+        }
+
         if (command.toLowerCase() === "exit") {
           console.log("\nExiting!\n");
           process.exit(0);
-
-        } else if (command.toLowerCase() === "create_folder") {
-          argument1
-            ? currentDirectory.createDirectory(argument1)
-            : console.log(`Error: folder name can not be empty`);
 
         } else if (command.toLowerCase() === "cd") {
           currentDirectory = currentDirectory.changeDirectory(argument1);
           path.push(currentDirectory);
 
-        } else if (command.toLowerCase() === "create_file") {
-          argument1
-            ? currentDirectory.createFile(argument1, argument2)
-            : console.log(`Error: file name can not be empty`);
-
         } else if (command.toLowerCase() === "ls") {
           currentDirectory.files.length != 0
             ? currentDirectory.listDirectory()
             : console.log(
-              `${currentDirectory.name.toUpperCase()} folder is empty`
-            );
+                `${currentDirectory.name.toUpperCase()} folder is empty`
+              );
 
         } else if (command.toLowerCase() === "show") {
           currentDirectory.showFile(argument1);
 
         } else if (command.toLowerCase() === "metadata") {
           currentDirectory.showMeta(argument1);
-
-        } else if (command.toLowerCase() === "destroy") {
-          currentDirectory.delete(argument1);
           
         } else if (command.toLowerCase() === "whereami") {
           let builder = "~";
@@ -74,7 +84,7 @@ const main = async () => {
           console.log("******++++", currentDirectory.moveBack(path));
         }
       } else {
-        console.log("You need to log before use commands");
+        console.log("You need to log in before use commands");
       }
 
       rl.prompt();

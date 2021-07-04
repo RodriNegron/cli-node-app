@@ -10,7 +10,7 @@ function userManager(userList, command, argument1, argument2, argument3) {
   } else if (command.toLowerCase() === "create_user") {
     userList.loggedUser && userList.loggedUser instanceof Super
       ? userList.createUser(argument1, argument2, argument3)
-      : console.log(`you don't have permission to access this method`);
+      : console.log("you don't have permission to access this method");
 
   } else if (command.toLowerCase() === "login") {
     userList.checkCredentials(argument1, argument2);
@@ -22,12 +22,12 @@ function userManager(userList, command, argument1, argument2, argument3) {
     userList.loggedUser instanceof Super ||
     userList.loggedUser instanceof Regular
       ? userList.updatePassword(argument1, userList.loggedUser.userName)
-      : console.log(`you don't have permission to access this method`);
+      : console.log("you don't have permission to access this method");
 
   } else if (command.toLowerCase() === "destroy_user") { //buscar primero se lo encuentra
     userList.loggedUser instanceof Super
       ? userList.deleteUser(argument1)
-      : console.log(`you don't have permission to access this method`);
+      : console.log("you don't have permission to access this method");
 
   } else if (command.toLowerCase() === "whoami") {
     if (userList.loggedUser) {

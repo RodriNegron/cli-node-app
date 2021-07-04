@@ -7,13 +7,21 @@ class Folder {
   }
 
   createDirectory(name) {
-    let newDirectory = new Folder(name);
-    this.files.push(newDirectory);
+    if (name) {
+      let newDirectory = new Folder(name);
+      this.files.push(newDirectory);
+    } else {
+      console.log("Error: folder name can not be empty");
+    }
   }
 
   createFile(name, content) {
-    let newFile = new File(name, content);
-    this.files.push(newFile);
+    if (name) {
+      let newFile = new File(name, content);
+      this.files.push(newFile);
+    } else {
+      console.log("Error: file name can not be empty");
+    }
   }
 
   showFile(fileName) {
