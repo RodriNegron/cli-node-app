@@ -1,10 +1,7 @@
-const Super = require("./super");
-const Regular = require("./regular");
-
 function userManager(userList, command, argument1, argument2, argument3) {
 
   if (command.toLowerCase() === "create_user") {
-    userList.loggedUser && userList.loggedUser instanceof Super
+    userList.loggedUser && userList.loggedUser.role == "super"
       ? userList.createUser(argument1, argument2, argument3)
       : console.log("you don't have permission to access this method");
 
@@ -15,14 +12,13 @@ function userManager(userList, command, argument1, argument2, argument3) {
     userList.logOut();
 
   } else if (command.toLowerCase() === "update_password") {
-    userList.loggedUser instanceof Super ||
-    userList.loggedUser instanceof Regular
+    userList.loggedUser.role === "super" ||
+    userList.loggedUser.role === "regular"
       ? userList.updatePassword(argument1, userList.loggedUser.userName)
       : console.log("you don't have permission to access this method");
 
   } else if (command.toLowerCase() === "destroy_user") {
-    //buscar primero se lo encuentra
-    userList.loggedUser instanceof Super
+    userList.loggedUser.role === "super" 
       ? userList.deleteUser(argument1)
       : console.log("you don't have permission to access this method");
       

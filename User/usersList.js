@@ -62,7 +62,16 @@ class UserList {
   }
 
   deleteUser(userName) {
-    this.userList = this.userList.filter((user) => user.userName != userName);
+    let ok;
+    this.userList.forEach((user) => {
+      if (user.userName === userName) {
+        ok = true;
+        this.userList = this.userList.filter(
+          (user) => user.userName != userName
+        );
+      }
+    });
+    if (!ok) console.log(`user ${userName} not found`);
   }
 }
 
