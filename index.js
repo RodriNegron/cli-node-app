@@ -14,28 +14,30 @@ const rl = readline.createInterface({
 const main = async () => {
   try {
     let users = new UserList();
-    let root = new Folder("root");
+    let root = new Folder("root", []);
     let path = [root];
-    let currentDirectory = root;
     let saveOption = process.argv[2];
     let fileName = process.argv[3];
+    let currentDirectory = root;
 
-    console.log("root ", root);
-    
     if (saveOption && fileName) {
+
       fs.access(`${fileName}.json`, fs.constants.F_OK, (err) => {
+
         if (err) {
           console.error("File does not exist, system will create a new file");
           users.createUser("admin", "admin", "super");
-        } else {
 
+        } else {
           fs.readFile(`${fileName}.json`, function (err, data) {
+
             if (err) {
               console.log("Error while reading file.");
               return console.log(err);
             } else {
               obj = JSON.parse(data);
-              currentDirectory = obj[0];
+              root = new Folder(obj[0].name, obj[0].files);
+              currentDirectory = root;
               users.userList = obj[1].userList;
             }
           });
@@ -48,23 +50,23 @@ const main = async () => {
 
     rl.prompt();
     rl.on("line", (cliComand) => {
+
       let inputs = cliComand.split(" ");
       let command = inputs[0];
       let argument1 = inputs[1];
       let argument2 = inputs[2];
       let argument3 = inputs[3];
 
-      console.log("root1 ", currentDirectory);
-
       userManager(users, command, argument1, argument2, argument3);
       if (users.loggedUser) {
-        
+
         if (command.toLowerCase() === "exit") {
           console.log("\nExiting!\n");
           process.exit(0);
 
         } else if (command.toLowerCase() === "cd") {
-          currentDirectory = currentDirectory.changeDirectory(argument1);
+          response = currentDirectory.changeDirectory(argument1);
+          currentDirectory = new Folder(response.name, response.files);
           path.push(currentDirectory);
 
         } else if (command.toLowerCase() === "show") {

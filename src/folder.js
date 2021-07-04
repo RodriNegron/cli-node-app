@@ -1,14 +1,14 @@
 const File = require("./file");
 
 class Folder {
-  constructor(name) {
+  constructor(name, files) {
     this.name = name;
-    this.files = [];
+    this.files = files;
   }
 
   createDirectory(name) {
     if (name) {
-      let newDirectory = new Folder(name);
+      let newDirectory = new Folder(name, []);
       this.files.push(newDirectory);
     } else {
       console.log("Error: folder name can not be empty");
@@ -27,7 +27,7 @@ class Folder {
   showFile(fileName) {
     let fileToShow;
     this.files.find((file) => {
-      if (file.name === fileName && file instanceof File) fileToShow = file;
+      if (file.name === fileName) fileToShow = file;
     });
     fileToShow ? console.log(fileToShow.name) : console.log("Not a file");
   }
@@ -35,7 +35,7 @@ class Folder {
   showMeta(fileName) {
     let fileToShow;
     this.files.find((file) => {
-      if (file.name === fileName && file instanceof File) fileToShow = file;
+      if (file.name === fileName && file.meta) fileToShow = file;
     });
     fileToShow ? console.log(fileToShow.meta) : console.log("Not a file");
   }
@@ -62,7 +62,7 @@ class Folder {
   }
 
   changeDirectory(targetDirectory) {
-    if (this.files[this.findIndex(targetDirectory)] instanceof Folder) {
+    if (this.files[this.findIndex(targetDirectory)].files) {
       return (targetDirectory = this.files[this.findIndex(targetDirectory)]);
     } else {
       console.log(`${targetDirectory} not a valid directory`);

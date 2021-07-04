@@ -7,4 +7,4 @@ class ReadOnly extends User {
   }
 }
 
-module.exports = ReadOnly; 
+module.exports = ReadOnly;

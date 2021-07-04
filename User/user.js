@@ -1,4 +1,3 @@
-
 class User {
   constructor(userName, password, role) {
     this.userName = userName;
@@ -6,6 +5,5 @@ class User {
     this.role = role;
   }
 }
-
 
 module.exports = User;

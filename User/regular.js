@@ -7,4 +7,4 @@ class Regular extends User {
   }
 }
 
-module.exports = Regular; 
+module.exports = Regular;
