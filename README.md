@@ -1,44 +1,162 @@
-# cli-node-app
-NodeJs Command line app for users and files management
+# cli-node-app  [[NODE JS]](https://nodejs.org/es/)
+NodeJs Command line app for users and files management 
 
 # Running
 
-+ npm install
+```
+node index.js
+```
+> default admin user: username = admin, password = admin 
 
-+ node .
+## For data persistence
 
-+ default admin user: username = admin, password = admin
+### `persisted` 
 
-## User commands (roles = super, regular, read_only)
+```
+node index.js -persisted file_name
+```
+> If file doesn't exist, system creates a new file, if it does exist system will read data from it. 
 
-+ create_user username password -role=ready_only
+> Data persistance on JSON format. Example:
+```
+[
+  {
+    "name": "name",
+    "files": []
+  },
+  {
+    "userList": [
+      {
+        "userName": "userName",
+        "password": "password",
+        "role": "role"
+      }
+    ],
+    "loggedUser": null
+  }
+]
+```
+## Available User Commands 
 
-+ update_password new_password
+### `create_user` 
 
-+ destroy_user username
+```
+create_user username password -role=ready_only 
+```
 
-+ login username password
+> roles = super, regular, read_only 
 
-+ logout
+> Only users with "super" role can use this command
 
-+ whoami
++ Creates a new user
 
-## File commands 
+### `update_password` 
 
-+ create_file file_1 "Contenido"
+```
+update_password newpassword
+```
++ Update user logged password 
 
-+ show file_1
+### `destroy_user` 
 
-+ metadata file_1
+```
+destroy_user username
+```
+> Only users with "super" role can use this command 
 
-+ create_folder folder_1
++ Delete one user by name
 
-+ cd folder_1
+### `login` 
 
-+ cd ..
+```
+login username password
+```
 
-+ destroy file_1 || folder_!
++ Log in to the system
 
-+ ls
+### `logout` 
 
-+ whereami
+```
+logout
+```
++ Finish current user session
+
+### `whoami` 
+
+```
+whoami
+```
++ Shows username for the current user
+
+## Available File Commands 
+
+### `create_file` 
+
+```
+create_file name content
+```
+> Only users with "super" or "regular" role can use this command 
+
++ Creates one file
+
+### `show` 
+
+```
+show file_name
+```
++ Show file name
+
+### `metadata` 
+
+```
+metadata name
+```
++ Show metadata for the file provided name
+
+### `create_folder` 
+
+```
+create_folder name
+```
+> Only users with "super" or "regular" role can use this command 
+
++ Create a new directory
+
+### `cd` 
+
+```
+cd directory_name
+```
++ Change directory by name
+
+
+### `..` 
+
+```
+cd ..
+```
++ Move one directory back
+
+### `destroy` 
+
+```
+destroy name
+```
++ Delete one directory / file by name
+
+### `ls` 
+
+```
+ls
+```
++ List all files / folders in the current directory
+
+### `whereami` 
+
+```
+whereami
+```
++ Show current directory path
+
+
+-------------------------------------
