@@ -53,6 +53,12 @@ const main = async () => {
       let argument2 = inputs[2];
       let argument3 = inputs[3];
 
+      if (command.toLowerCase() === "exit") {
+        console.log("\n Finished \n");
+        process.exit(0);
+
+      }
+
       userManager(users, command, argument1, argument2, argument3);
 
       if (users.loggedUser) {
@@ -72,11 +78,7 @@ const main = async () => {
           }
         }
 
-        if (command.toLowerCase() === "exit") {
-          console.log("\n Finished \n");
-          process.exit(0);
-
-        } else if (command.toLowerCase() === "cd") {
+        if (command.toLowerCase() === "cd") {
           if (argument1 === "..") {
             path.length > 2
               ? (currentDirectory = path[path.length - 2])
