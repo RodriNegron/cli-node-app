@@ -66,8 +66,10 @@ const main = async () => {
 
         } else if (command.toLowerCase() === "cd") {
           response = currentDirectory.changeDirectory(argument1);
-          currentDirectory = new Folder(response.name, response.files);
-          path.push(currentDirectory);
+          if (response){
+            currentDirectory = new Folder(response.name, response.files);
+            path.push(currentDirectory);
+          }
 
         } else if (command.toLowerCase() === "show") {
           currentDirectory.showFile(argument1);
