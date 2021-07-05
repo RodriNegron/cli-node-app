@@ -8,8 +8,18 @@ class Folder {
 
   createDirectory(name) {
     if (name) {
-      let newDirectory = new Folder(name, []);
-      this.files.push(newDirectory);
+      let createdFile = false;
+      this.files.forEach((file) => {
+        if (file.name === name) {
+          createdFile = true;
+        }
+      });
+      if (!createdFile) {
+        let newDirectory = new Folder(name, []);
+        this.files.push(newDirectory);
+      } else {
+        console.log("Folder with this name already exists in this directory");
+      }
     } else {
       console.log("Error: folder name can not be empty");
     }
@@ -62,13 +72,15 @@ class Folder {
   }
 
   changeDirectory(targetDirectory) {
-    if (this.files[this.findIndex(targetDirectory)].files) {
+    if (
+      this.files[this.findIndex(targetDirectory)] &&
+      this.files[this.findIndex(targetDirectory)].files
+    ) {
       return (targetDirectory = this.files[this.findIndex(targetDirectory)]);
     } else {
       console.log(`${targetDirectory} not a valid directory`);
     }
   }
-  
 }
 
 module.exports = Folder;
