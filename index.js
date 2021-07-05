@@ -27,7 +27,6 @@ const main = async () => {
         if (err) {
           console.error("File does not exist, system will create a new file");
           users.createUser("admin", "admin", "super");
-
         } else {
           fs.readFile(`${fileName}.json`, function (err, data) {
 
@@ -58,6 +57,7 @@ const main = async () => {
       let argument3 = inputs[3];
 
       userManager(users, command, argument1, argument2, argument3);
+
       if (users.loggedUser) {
 
         if (command.toLowerCase() === "exit") {
@@ -66,7 +66,7 @@ const main = async () => {
 
         } else if (command.toLowerCase() === "cd") {
           response = currentDirectory.changeDirectory(argument1);
-          if (response){
+          if (response) {
             currentDirectory = new Folder(response.name, response.files);
             path.push(currentDirectory);
           }
@@ -92,6 +92,7 @@ const main = async () => {
           console.log(builder);
 
         } else if (command.toLowerCase() === "ls") {
+          console.log("path", path);
           currentDirectory.files.length != 0
             ? currentDirectory.listDirectory()
             : console.log(
@@ -99,15 +100,25 @@ const main = async () => {
               );
 
         } else if (command.toLowerCase() === "..") {
-          console.log("******++++", currentDirectory.moveBack(path));
+          path.length > 2
+            ? (currentDirectory = path[path.length - 2])
+            : (currentDirectory = root);
+
+          path.length > 1
+            ? path.pop()
+            : console.log("you can not go backwards");
         }
+
       } else {
         console.log("You need to log in before use commands");
       }
+
       if (saveOption === "-persisted") writeFile(fileName, root, users);
 
       rl.prompt();
+
     }).on("close", () => {
+
       console.log("Exiting");
       process.exit(0);
     });

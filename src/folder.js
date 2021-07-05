@@ -68,16 +68,7 @@ class Folder {
       console.log(`${targetDirectory} not a valid directory`);
     }
   }
-
-  //TODO
-  moveBack(path) {
-    if (path.length > 1) {
-      path.pop();
-      return path;
-    } else {
-      return console.log("you can not go backwards");
-    }
-  }
+  
 }
 
 module.exports = Folder;
