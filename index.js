@@ -22,15 +22,12 @@ const main = async () => {
     let currentDirectory = root;
 
     if (saveOption && fileName) {
-
       fs.access(`${fileName}.json`, fs.constants.F_OK, (err) => {
-
         if (err) {
           console.error("File does not exist, system will create a new file");
           users.createUser("admin", "admin", "super");
         } else {
           fs.readFile(`${fileName}.json`, function (err, data) {
-
             if (err) {
               console.log("Error while reading file.");
               return console.log(err);
@@ -50,7 +47,6 @@ const main = async () => {
 
     rl.prompt();
     rl.on("line", (cliComand) => {
-
       let inputs = cliComand.split(" ");
       let command = inputs[0];
       let argument1 = inputs[1];
@@ -66,10 +62,20 @@ const main = async () => {
           process.exit(0);
 
         } else if (command.toLowerCase() === "cd") {
-          response = currentDirectory.changeDirectory(argument1);
-          if (response) {
-            currentDirectory = new Folder(response.name, response.files);
-            path.push(currentDirectory);
+          if (argument1 === "..") {
+            path.length > 2
+              ? (currentDirectory = path[path.length - 2])
+              : (currentDirectory = root);
+
+            path.length > 1
+              ? path.pop()
+              : console.log("you can not go backwards");
+          } else {
+            response = currentDirectory.changeDirectory(argument1);
+            if (response) {
+              currentDirectory = new Folder(response.name, response.files);
+              path.push(currentDirectory);
+            }
           }
 
         } else if (command.toLowerCase() === "show") {
@@ -98,17 +104,8 @@ const main = async () => {
             : console.log(
                 `${currentDirectory.name.toUpperCase()} folder is empty`
               );
-
-        } else if (command.toLowerCase() === "..") {
-          path.length > 2
-            ? (currentDirectory = path[path.length - 2])
-            : (currentDirectory = root);
-
-          path.length > 1
-            ? path.pop()
-            : console.log("you can not go backwards");
         }
-
+        
       } else {
         console.log("You need to log in before use commands");
       }
@@ -116,9 +113,7 @@ const main = async () => {
       if (saveOption === "-persisted") writeFile(fileName, root, users);
 
       rl.prompt();
-
     }).on("close", () => {
-
       console.log("Exiting");
       process.exit(0);
     });

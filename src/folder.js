@@ -1,4 +1,3 @@
-const File = require("./file");
 
 class Folder {
   constructor(name, files) {
