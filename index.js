@@ -57,8 +57,23 @@ const main = async () => {
 
       if (users.loggedUser) {
 
+        if (
+          users.loggedUser.role === "super" ||
+          users.loggedUser.role === "regular"
+        ) {
+          if (command.toLowerCase() === "create_folder") {
+            currentDirectory.create(argument1, Folder);
+
+          } else if (command.toLowerCase() === "create_file") {
+            currentDirectory.create(argument1, File, argument2);
+
+          } else if (command.toLowerCase() === "destroy") {
+            currentDirectory.delete(argument1);
+          }
+        }
+
         if (command.toLowerCase() === "exit") {
-          console.log("\nExiting!\n");
+          console.log("\n Finished \n");
           process.exit(0);
 
         } else if (command.toLowerCase() === "cd") {
@@ -84,15 +99,6 @@ const main = async () => {
         } else if (command.toLowerCase() === "metadata") {
           currentDirectory.showMeta(argument1);
 
-        } else if (command.toLowerCase() === "create_folder") {
-          currentDirectory.create(argument1, Folder);
-
-        } else if (command.toLowerCase() === "create_file") {
-          currentDirectory.create(argument1, File, argument2);
-
-        } else if (command.toLowerCase() === "destroy") {
-          currentDirectory.delete(argument1);
-
         } else if (command.toLowerCase() === "whereami") {
           let builder = "~";
           path.forEach((directory) => (builder += "/" + directory.name));
@@ -105,7 +111,7 @@ const main = async () => {
                 `${currentDirectory.name.toUpperCase()} folder is empty`
               );
         }
-        
+
       } else {
         console.log("You need to log in before use commands");
       }
