@@ -5,6 +5,7 @@ const Folder = require("./src/folder");
 const UserList = require("./user/usersList");
 const writeFile = require("./utils/fileUtils");
 const fs = require("fs");
+const File = require("./src/file");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -78,10 +79,10 @@ const main = async () => {
           currentDirectory.showMeta(argument1);
 
         } else if (command.toLowerCase() === "create_folder") {
-          currentDirectory.createDirectory(argument1);
+          currentDirectory.create(argument1, Folder);
 
         } else if (command.toLowerCase() === "create_file") {
-          currentDirectory.createFile(argument1, argument2);
+          currentDirectory.create(argument1, File, argument2);
 
         } else if (command.toLowerCase() === "destroy") {
           currentDirectory.delete(argument1);
@@ -92,7 +93,6 @@ const main = async () => {
           console.log(builder);
 
         } else if (command.toLowerCase() === "ls") {
-          console.log("path", path);
           currentDirectory.files.length != 0
             ? currentDirectory.listDirectory()
             : console.log(

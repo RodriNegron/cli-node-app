@@ -6,7 +6,8 @@ class Folder {
     this.files = files;
   }
 
-  createDirectory(name) {
+  create(name, type, content) {
+    let newFile;
     if (name) {
       let createdFile = false;
       this.files.forEach((file) => {
@@ -15,22 +16,15 @@ class Folder {
         }
       });
       if (!createdFile) {
-        let newDirectory = new Folder(name, []);
-        this.files.push(newDirectory);
+        content
+          ? (newFile = new type(name, content))
+          : (newFile = new type(name, []));
+        this.files.push(newFile);
       } else {
-        console.log("Folder with this name already exists in this directory");
+        console.log("this name already exists in this directory");
       }
     } else {
-      console.log("Error: folder name can not be empty");
-    }
-  }
-
-  createFile(name, content) {
-    if (name) {
-      let newFile = new File(name, content);
-      this.files.push(newFile);
-    } else {
-      console.log("Error: file name can not be empty");
+      console.log("Error: name can not be empty");
     }
   }
 
